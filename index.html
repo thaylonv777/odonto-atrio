@@ -300,6 +300,13 @@ footer{border-top:1px solid var(--line);}
 .mform-err{color:#F08A7E;}
 
 /* === Depoimento === */
+.depo-sound{position:absolute;left:50%;bottom:22px;transform:translateX(-50%);z-index:3;display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border-radius:999px;border:1px solid rgba(230,206,148,.55);background:rgba(10,10,11,.72);backdrop-filter:blur(8px);color:#F3E2B3;font:600 13px/1 'Inter',sans-serif;letter-spacing:.02em;cursor:pointer;transition:background .2s,transform .2s;white-space:nowrap;}
+.depo-sound:hover{background:rgba(10,10,11,.88);transform:translateX(-50%) scale(1.03);}
+.depo-sound svg{width:16px;height:16px;stroke:#E6CE94;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+.depo-sound.on{animation:none;}
+.depo-sound:not(.on){animation:sndpulse 2.4s ease-in-out infinite;}
+@keyframes sndpulse{0%,100%{box-shadow:0 0 0 0 rgba(201,164,92,.45);}50%{box-shadow:0 0 0 8px rgba(201,164,92,0);}}
+
 #depoimento{padding:120px 24px;}
 .depo-wrap{display:grid;grid-template-columns:1fr;gap:56px;align-items:center;}
 @media(min-width:900px){.depo-wrap{grid-template-columns:1.1fr .9fr;gap:80px;}}
@@ -425,6 +432,7 @@ footer{border-top:1px solid var(--line);}
           <div class="depo-screen" id="depoScreen" data-yt="VFz4CQwzpHQ">
             <div class="depo-ph">Depoimento</div>
             <div class="depo-shield" aria-hidden="true"></div>
+            <button type="button" class="depo-sound" id="depoSound" aria-label="Ativar som do depoimento"><svg viewBox="0 0 24 24"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg><span>Ativar som</span></button>
           </div>
         </div>
       </div>
@@ -611,6 +619,14 @@ function sendLead(ev){
       } else cmd('playVideo');
     } else cmd('pauseVideo');
   }); },{threshold:0.35}).observe(box);
+  var sb=document.getElementById('depoSound'), on=false;
+  var icOn='<svg viewBox="0 0 24 24"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M19 5a10 10 0 0 1 0 14"/></svg><span>Som ativado</span>';
+  var icOff=sb.innerHTML;
+  sb.addEventListener('click',function(){
+    on=!on;
+    if(on){ cmd('unMute'); ifr&&ifr.contentWindow.postMessage(JSON.stringify({event:'command',func:'setVolume',args:[100]}),'*'); cmd('playVideo'); sb.innerHTML=icOn; sb.classList.add('on'); sb.setAttribute('aria-label','Desativar som'); }
+    else { cmd('mute'); sb.innerHTML=icOff; sb.classList.remove('on'); sb.setAttribute('aria-label','Ativar som do depoimento'); }
+  });
 })();
 window.addEventListener('scroll', () => {
   document.getElementById('header').classList.toggle('scrolled', window.scrollY > 40);
