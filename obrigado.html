@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cadastro recebido | Agende sua call · Manu Odonto</title>
+<meta name="description" content="Escolha o melhor horário para a sua call com a equipe Manu Odonto.">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#0A0A0B">
+<link rel="icon" type="image/png" href="/icon_navegador.png">
+<link rel="apple-touch-icon" href="/icon_principal.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+
+<!-- ============ META PIXEL ============ -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1423874645797080');
+fbq('track', 'PageView');
+</script>
+<noscript><img alt="" height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1423874645797080&ev=PageView&noscript=1"/></noscript>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{--bg:#0A0A0B;--ink:#F3EEE4;--muted:rgba(243,238,228,.6);--gold:#C9A45C;--gold-l:#E6CE94;--line:rgba(201,164,92,.14);}
+html,body{overflow-x:hidden;max-width:100%;}
+body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;min-height:100vh;}
+.grid-bg{position:fixed;inset:0;pointer-events:none;background-image:linear-gradient(rgba(201,164,92,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(201,164,92,.035) 1px,transparent 1px);background-size:60px 60px;}
+.orb{position:fixed;top:-200px;left:50%;transform:translateX(-50%);width:900px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(201,164,92,.14) 0%,transparent 65%);filter:blur(40px);pointer-events:none;}
+header{position:relative;z-index:2;max-width:1100px;margin:0 auto;padding:24px;display:flex;align-items:center;justify-content:space-between;}
+header img{height:30px;width:auto;}
+main{position:relative;z-index:2;max-width:1100px;margin:0 auto;padding:24px 24px 80px;}
+.top{text-align:center;max-width:720px;margin:0 auto 40px;}
+.check{width:64px;height:64px;margin:0 auto 24px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:1px solid rgba(201,164,92,.5);background:rgba(201,164,92,.08);box-shadow:0 0 0 8px rgba(201,164,92,.04);}
+.check svg{width:28px;height:28px;stroke:var(--gold);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+.eyebrow{display:inline-block;font-size:11px;text-transform:uppercase;letter-spacing:.28em;color:var(--gold);font-weight:500;margin-bottom:16px;}
+.eyebrow::before,.eyebrow::after{content:'';display:inline-block;width:28px;height:1px;background:var(--gold);vertical-align:middle;opacity:.7;margin:0 12px;}
+h1{font-size:clamp(2rem,4.6vw,3.3rem);font-weight:600;letter-spacing:-.035em;line-height:1.1;margin-bottom:18px;}
+.gold{background:linear-gradient(110deg,#F3E2B3 0%,#C9A45C 55%,#9C7A3C 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+.sub{font-size:clamp(1rem,1.4vw,1.15rem);color:var(--muted);line-height:1.6;}
+.steps{display:grid;grid-template-columns:1fr;gap:12px;max-width:820px;margin:0 auto 36px;}
+@media(min-width:720px){.steps{grid-template-columns:repeat(3,1fr);}}
+.step{display:flex;align-items:center;gap:14px;padding:16px 18px;border-radius:14px;background:#111113;border:1px solid var(--line);}
+.step .n{flex-shrink:0;width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;border:1px solid rgba(201,164,92,.4);color:var(--gold);}
+.step.done .n{background:var(--gold);color:#0A0A0B;border-color:var(--gold);}
+.step.now{border-color:rgba(201,164,92,.55);box-shadow:0 0 0 1px rgba(201,164,92,.15),0 18px 40px -20px rgba(201,164,92,.35);}
+.step b{display:block;font-size:14px;font-weight:600;}
+.step span{font-size:12.5px;color:var(--muted);}
+.cal-card{position:relative;border-radius:24px;padding:10px;background:linear-gradient(160deg,rgba(230,206,148,.4),rgba(201,164,92,.08) 40%,rgba(201,164,92,.3));box-shadow:0 40px 90px -40px rgba(201,164,92,.35);}
+.cal-inner{border-radius:18px;background:#0E0E10;overflow:hidden;min-height:640px;}
+#cal-inline{width:100%;overflow:auto;}
+@media(max-width:719px){.steps{display:none;}.top{margin-bottom:28px;}}
+.cal-loading{display:flex;align-items:center;justify-content:center;min-height:640px;color:var(--muted);font-size:13px;letter-spacing:.18em;text-transform:uppercase;}
+.booked{display:none;text-align:center;padding:72px 24px;}
+.booked h2{font-size:clamp(1.6rem,3vw,2.2rem);font-weight:600;letter-spacing:-.03em;margin:18px 0 10px;}
+.booked p{color:var(--muted);line-height:1.6;max-width:520px;margin:0 auto;}
+.note{text-align:center;margin-top:24px;font-size:13px;color:rgba(243,238,228,.45);}
+.note a{color:var(--gold-l);text-decoration:none;border-bottom:1px solid rgba(230,206,148,.35);}
+footer{position:relative;z-index:2;border-top:1px solid var(--line);padding:28px 24px;text-align:center;font-size:11px;color:rgba(243,238,228,.4);}
+</style>
+</head>
+<body>
+<div class="grid-bg"></div>
+<div class="orb"></div>
+
+<header>
+  <a href="/"><img src="/logo_manu_odonto.png" alt="Manu Odonto" width="120" height="30"></a>
+</header>
+
+<main>
+  <div class="top">
+    <div class="check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+    <span class="eyebrow">Cadastro recebido</span>
+    <h1><span id="hiName">Último passo:</span><br><span class="gold">agende sua call de 30 minutos.</span></h1>
+    <p class="sub">Escolha o melhor dia e horário. Na call, mostramos como a estrutura de anúncios validados e o agente de IA funcionam na realidade da sua clínica.</p>
+  </div>
+
+  <div class="steps">
+    <div class="step done"><div class="n">✓</div><div><b>Cadastro</b><span>Recebemos seus dados</span></div></div>
+    <div class="step now"><div class="n">2</div><div><b>Agende a call</b><span>Escolha o horário abaixo</span></div></div>
+    <div class="step"><div class="n">3</div><div><b>Diagnóstico</b><span>30 min com especialista</span></div></div>
+  </div>
+
+  <div class="cal-card">
+    <div class="cal-inner">
+      <div class="cal-loading" id="calLoading">Carregando agenda...</div>
+      <div id="cal-inline"></div>
+      <div class="booked" id="booked">
+        <div class="check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <h2>Call agendada <span class="gold">com sucesso.</span></h2>
+        <p>Você vai receber a confirmação com o link da reunião no seu e-mail. Até lá!</p>
+      </div>
+    </div>
+  </div>
+
+  <p class="note">Não encontrou um horário? Nossa equipe também vai falar com você pelo WhatsApp.</p>
+</main>
+
+<footer>© 2026 Manu Odonto · Assessoria Átrio</footer>
+
+<script>
+var lead={};
+try{ lead=JSON.parse(sessionStorage.getItem('manu_lead')||'{}'); }catch(e){}
+if(lead.nome){ document.getElementById('hiName').textContent=lead.nome.split(' ')[0]+', último passo:'; }
+
+(function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if(typeof namespace === "string"){cal.ns[namespace] = cal.ns[namespace] || api;p(cal.ns[namespace], ar);p(cal, ["initNamespace", namespace]);} else p(cal, ar); return;} p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
+
+Cal("init", "call30", { origin: "https://cal.com" });
+var cfg={ layout:"month_view", theme:"dark" };
+if(lead.nome) cfg.name=lead.nome;
+if(lead.email) cfg.email=lead.email;
+if(lead.clinica) cfg.notes='Clínica: '+lead.clinica+(lead.whatsapp?' · WhatsApp: '+lead.whatsapp:'');
+Cal.ns.call30("inline", { elementOrSelector:"#cal-inline", config: cfg, calLink: "agenda-thaylon/30min" });
+Cal.ns.call30("ui", { theme:"dark", hideEventTypeDetails:false, layout:"month_view",
+  cssVarsPerTheme:{ dark:{ "cal-brand":"#C9A45C", "cal-brand-emphasis":"#E6CE94", "cal-brand-text":"#0A0A0B", "cal-bg":"#0E0E10", "cal-bg-emphasis":"#18181B", "cal-border":"rgba(201,164,92,0.18)" } } });
+Cal.ns.call30("on", { action:"linkReady", callback:function(){ var l=document.getElementById('calLoading'); if(l) l.remove(); }});
+Cal.ns.call30("on", { action:"bookingSuccessful", callback:function(){
+  if(window.fbq) fbq('track','Schedule');
+  document.getElementById('cal-inline').style.display='none';
+  document.getElementById('booked').style.display='block';
+}});
+</script>
+</body>
+</html>

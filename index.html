@@ -594,11 +594,16 @@ function sendLead(ev){
   var btn=document.getElementById('f_btn'); btn.disabled=true; btn.textContent='Enviando...';
   fetch(LEAD_WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},
     body:JSON.stringify({nome:nome,whatsapp:zap,email:email,clinica:clinica,origem:'landing-odonto-metodologia'})})
-    .finally(function(){
-      if(window.fbq) fbq('track','Lead');
-      document.getElementById('leadForm').style.display='none';
-      document.getElementById('leadDone').style.display='block';
-    });
+    .catch(function(){})
+    .finally(go);
+  // segue para /obrigado mesmo se o webhook demorar
+  var done=false; setTimeout(go,4000);
+  function go(){
+    if(done) return; done=true;
+    try{ sessionStorage.setItem('manu_lead',JSON.stringify({nome:nome,email:email,whatsapp:zap,clinica:clinica})); }catch(e){}
+    if(window.fbq) fbq('track','Lead');
+    setTimeout(function(){ window.location.href='/obrigado'; },350);
+  }
   return false;
 }
 
