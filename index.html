@@ -298,6 +298,20 @@ footer{border-top:1px solid var(--line);}
 .mfield input:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,164,92,.18);}
 .mdone-check{background:rgba(201,164,92,.12);color:var(--gold);}
 .mform-err{color:#F08A7E;}
+
+/* === Depoimento === */
+#depoimento{padding:120px 24px;}
+.depo-wrap{display:grid;grid-template-columns:1fr;gap:56px;align-items:center;}
+@media(min-width:900px){.depo-wrap{grid-template-columns:1.1fr .9fr;gap:80px;}}
+.depo-tag{display:inline-flex;align-items:center;gap:10px;margin-top:28px;padding:12px 18px;border-radius:14px;background:#111113;border:1px solid var(--line);font-size:14px;color:rgba(243,238,228,.85);}
+.depo-tag svg{width:18px;height:18px;stroke:var(--gold);fill:none;stroke-width:1.6;}
+.depo-tag b{color:var(--gold-l);font-weight:600;}
+.depo-frame{position:relative;width:100%;max-width:340px;margin:0 auto;aspect-ratio:9/16;border-radius:30px;padding:8px;background:linear-gradient(160deg,rgba(230,206,148,.55),rgba(201,164,92,.12) 40%,rgba(201,164,92,.4));box-shadow:0 40px 90px -30px rgba(201,164,92,.35),0 0 0 1px rgba(201,164,92,.2);}
+.depo-screen{position:relative;width:100%;height:100%;border-radius:23px;overflow:hidden;background:#000;}
+.depo-screen iframe{position:absolute;inset:0;width:100%;height:100%;border:0;pointer-events:none;}
+.depo-shield{position:absolute;inset:0;z-index:2;}
+.depo-ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:rgba(243,238,228,.35);font-size:12px;letter-spacing:.2em;text-transform:uppercase;}
+.depo-glow{position:absolute;inset:-40px;z-index:-1;background:radial-gradient(circle,rgba(201,164,92,.18),transparent 65%);filter:blur(30px);}
 </style>
 </head>
 <body>
@@ -309,6 +323,7 @@ footer{border-top:1px solid var(--line);}
     </a>
     <nav>
       <a href="#estrutura">Estrutura</a>
+      <a href="#depoimento">Depoimento</a>
       <a href="#diferenciais">Por que funciona</a>
       <a href="#impacto">Impacto</a>
     </nav>
@@ -389,6 +404,29 @@ footer{border-top:1px solid var(--line);}
         </div>
         <h3>Treinamento de equipe</h3>
         <p>Metodologia Bravo para treinar sua equipe a extrair o máximo de cada oportunidade, aliada ao agente de IA.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DEPOIMENTO -->
+<section id="depoimento">
+  <div class="section-inner">
+    <div class="depo-wrap">
+      <div class="fade-left">
+        <span class="section-eyebrow gradient-text">Depoimento</span>
+        <h2 class="section-title">Veja quem já utiliza o nosso <span class="gradient-text">método e estrutura.</span></h2>
+        <p class="section-subtitle">Uma clínica odontológica do Rio Grande do Sul mostra, na prática, como é ter anúncios validados e o agente de IA trabalhando juntos.</p>
+        <div class="depo-tag"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span><b>Clínica odontológica</b> · Rio Grande do Sul</span></div>
+      </div>
+      <div class="fade-right" style="position:relative;">
+        <div class="depo-frame">
+          <div class="depo-glow"></div>
+          <div class="depo-screen" id="depoScreen" data-yt="VFz4CQwzpHQ">
+            <div class="depo-ph">Depoimento</div>
+            <div class="depo-shield" aria-hidden="true"></div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -556,6 +594,24 @@ function sendLead(ev){
   return false;
 }
 
+
+// Depoimento: carrega e toca (mudo, em loop) ao entrar na tela; pausa ao sair
+(function(){
+  var box=document.getElementById('depoScreen'); if(!box) return;
+  var id=box.getAttribute('data-yt'), ifr=null;
+  function cmd(f){ if(ifr&&ifr.contentWindow) ifr.contentWindow.postMessage(JSON.stringify({event:'command',func:f,args:[]}),'*'); }
+  new IntersectionObserver(function(es){ es.forEach(function(e){
+    if(e.isIntersecting){
+      if(!ifr){
+        ifr=document.createElement('iframe');
+        ifr.src='https://www.youtube-nocookie.com/embed/'+id+'?autoplay=1&mute=1&loop=1&playlist='+id+'&controls=0&disablekb=1&fs=0&modestbranding=1&rel=0&playsinline=1&iv_load_policy=3&enablejsapi=1';
+        ifr.title='Depoimento de clínica odontológica'; ifr.setAttribute('tabindex','-1');
+        ifr.allow='autoplay; encrypted-media';
+        box.insertBefore(ifr, box.querySelector('.depo-shield'));
+      } else cmd('playVideo');
+    } else cmd('pauseVideo');
+  }); },{threshold:0.35}).observe(box);
+})();
 window.addEventListener('scroll', () => {
   document.getElementById('header').classList.toggle('scrolled', window.scrollY > 40);
 });
